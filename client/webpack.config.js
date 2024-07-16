@@ -1,77 +1,9 @@
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const WebpackPwaManifest = require('webpack-pwa-manifest');
-// const path = require('path');
-// const { InjectManifest } = require('workbox-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// module.exports = {
-//   mode: 'production', // use 'development' if you are developing
-//   entry: './src/js/index.js',
-//   output: {
-//     filename: 'bundle.js',
-//     path: path.resolve(__dirname, 'dist'),
-//   },
-//   plugins: [
-//     new HtmlWebpackPlugin({
-//       template: './index.html', // Adjust the path as needed
-//       title: 'Webpack Plugin',
-//     }),    
-//     new MiniCssExtractPlugin(),
-//     new InjectManifest({
-//       swSrc: path.resolve(__dirname, './src-sw.js'), // Adjust the path as needed
-//       swDest: 'service-worker.js',
-//     }),    
-//     new WebpackPwaManifest({
-//       name: 'My Progressive Web App',
-//       short_name: 'MyPWA',
-//       description: 'My awesome Progressive Web App!',
-//       background_color: '#ffffff',
-//       crossorigin: 'use-credentials', // can be null, use-credentials or anonymous
-//       icons: [
-//         {
-//           src: path.resolve('./src/images/logo.png'), // Ensure the correct path to your image
-//           sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-//         },
-//       ],
-//     }),
-//   ],
-//   module: {
-//     rules: [
-//       {
-//         test: /\.css$/i,
-//         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-//       },
-//       {
-//         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-//         type: 'asset/resource',
-//       },
-//       {
-//         test: /\.m?js$/,
-//         exclude: /(node_modules|bower_components)/,
-//         use: {
-//           loader: 'babel-loader',
-//           options: {
-//             presets: ['@babel/preset-env'],
-//           },
-//         },
-//       },
-//     ],
-//   },
-// };
-
-
-
-
-
-
-
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-const { InjectManifest } = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin')
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
+;// TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
 
 module.exports = () => {
@@ -89,6 +21,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'JATE',
+        favicon: './favicon.ico'
       }),
       new WebpackPwaManifest({
         fingerprints: false,
@@ -105,15 +38,13 @@ module.exports = () => {
             src: path.resolve('./src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
-          },
+          }
         ],
       }),
       new InjectManifest({
-        swSrc: './src-sw.js'
+        swSrc: './src-sw.js',
       }),
-      
     ],
-
     module: {
       rules: [
         {
